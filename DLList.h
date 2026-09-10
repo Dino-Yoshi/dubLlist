@@ -28,10 +28,10 @@ private:
         Node* next;
         Node* prev;
     };
-
+    Node* head;
     Node* tail;
 public:
-    Node* head;
+
     DLList();
     bool PushFront(T);
     bool PushBack(T);
