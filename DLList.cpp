@@ -8,8 +8,8 @@
 template<typename T>
 DLList<T>::DLList() {
     this->numNodes = 0;
-    this->head = NULL;
-    this->tail = NULL;
+    this->head = nullptr;
+    this->tail = nullptr;
 }
 
 // Time Complexity: O(1)
@@ -17,12 +17,12 @@ template<typename T>
 bool DLList<T>::PushFront(T data) {
 
     // if list empty
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         this->head = this->tail = new Node();
         this->head->data = this->tail->data = data;
-        this->head->next = NULL;
-        this->tail->next = NULL;
-        this->tail->prev = NULL;
+        this->head->next = nullptr;
+        this->tail->next = nullptr;
+        this->tail->prev = nullptr;
         numNodes++;
         return true;
 
@@ -33,7 +33,7 @@ bool DLList<T>::PushFront(T data) {
     this->head = new Node();
     this->head->data = data;
     this->head->next = temp;
-    this->head->prev = NULL;
+    this->head->prev = nullptr;
     temp->prev = this->head;
     numNodes++;
     return true;
@@ -45,12 +45,12 @@ template<typename T>
 bool DLList<T>::PushBack(T data) {
     // empty case
 
-    if (this->tail == NULL) {
+    if (this->tail == nullptr) {
         this->head = this->tail = new Node();
         this->head->data = this->tail->data = data;
-        this->head->next = NULL;
-        this->tail->next = NULL;
-        this->tail->prev = NULL;
+        this->head->next = nullptr;
+        this->tail->next = nullptr;
+        this->tail->prev = nullptr;
         numNodes++;
         return true;
 
@@ -60,7 +60,7 @@ bool DLList<T>::PushBack(T data) {
 
     Node *newNode = new Node();
     newNode->data = data;
-    newNode->next = NULL;
+    newNode->next = nullptr;
     newNode->prev = this->tail;
     this->tail->next = newNode;
     this->tail = newNode;
@@ -72,8 +72,8 @@ bool DLList<T>::PushBack(T data) {
 // Time Complexity: O(1)
 template<typename T>
 T DLList<T>::TopFront() {
-    if (this->head == NULL) {
-        return NULL;
+    if (this->head == nullptr) {
+        return T();
     }
     return this->head->data;
 }
@@ -81,23 +81,23 @@ T DLList<T>::TopFront() {
 // Time Complexity: O(1)
 template<typename T>
 T DLList<T>::PopFront() {
-    if (this->head == NULL) {
-        return NULL;
+    if (this->head == nullptr) {
+        return T();
     }
 
     // i.e. [0] <-> [1] <-> [3] <-> [4]
     // head should go to 1, its prev should be null, its next should be 3.
     Node *tmp = this->head;
     T tmpDat = this->head->data;
-    if (this->head->next == NULL) {
-        this->head->prev = NULL;
-        head = tail = NULL;
+    if (this->head->next == nullptr) {
+        this->head->prev = nullptr;
+        head = tail = nullptr;
         delete tmp;
         numNodes--;
         return tmpDat;
     }
     head = this->head->next;
-    this->head->prev = NULL;
+    this->head->prev = nullptr;
     delete tmp;
     numNodes--;
     return tmpDat;
@@ -106,8 +106,8 @@ T DLList<T>::PopFront() {
 // Time Complexity: O(1)
 template<typename T>
 T DLList<T>::TopBack() {
-    if (this->head == NULL) {
-        return NULL;
+    if (this->head == nullptr) {
+        return T();
     }
     return this->tail->data;
 }
@@ -115,23 +115,23 @@ T DLList<T>::TopBack() {
 // Time Complexity: O(1)
 template<typename T>
 T DLList<T>::PopBack() {
-    if (this->head == NULL) {
-        return NULL;
+    if (this->head == nullptr) {
+        return T();
     }
 
     // i.e. [0] <-> [1] <-> [3] <-> [4]
     // tail should go to 3, its prev should be 1, its next should be null.
     Node *tmp = this->tail;
     T tmpDat = this->tail->data;
-    if (this->tail->prev == NULL) {
-        this->tail->next = NULL;
-        head = tail = NULL;
+    if (this->tail->prev == nullptr) {
+        this->tail->next = nullptr;
+        head = tail = nullptr;
         delete tmp;
         numNodes--;
         return tmpDat;
     }
     tail = this->tail->prev; // 3
-    this->tail->next = NULL;
+    this->tail->next = nullptr;
     delete tmp;
     numNodes--;
     return tmpDat;
@@ -142,7 +142,7 @@ template<typename T>
 bool DLList<T>::Find(T data) {
 
     Node *currNode = this->head;
-    while (currNode != NULL) {
+    while (currNode != nullptr) {
         if (currNode->data == data) {
             return true;
         }
@@ -157,12 +157,12 @@ bool DLList<T>::Erase(T data) {
     // beem
 
     // empty case
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         return false;
     }
 
     Node *currNode = this->head;
-    while (currNode != NULL) {
+    while (currNode != nullptr) {
         if (currNode->data == data) {
             // Middle Case
             if (currNode != head && currNode != tail) {
@@ -175,13 +175,13 @@ bool DLList<T>::Erase(T data) {
             // Beginning Case
             if (currNode == head) {
                 head = currNode->next;
-                if (head == NULL) {
-                    tail = NULL;
+                if (head == nullptr) {
+                    tail = nullptr;
                     delete currNode;
                     numNodes--;
                     return true;
                 }
-                currNode->next->prev = NULL;
+                currNode->next->prev = nullptr;
                 delete currNode;
                 numNodes--;
                 return true;
@@ -189,13 +189,13 @@ bool DLList<T>::Erase(T data) {
             // End Case
             if (currNode == tail) {
                 tail = currNode->prev;
-                if (tail == NULL) {
-                    head = NULL;
+                if (tail == nullptr) {
+                    head = nullptr;
                     delete currNode;
                     numNodes--;
                     return true;
                 }
-                currNode->prev->next = NULL;
+                currNode->prev->next = nullptr;
                 delete currNode;
                 numNodes--;
                 return true;
@@ -209,7 +209,7 @@ bool DLList<T>::Erase(T data) {
 // Time Complexity: O(1)
 template<typename T>
 bool DLList<T>::Empty() {
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         return true;
     }
     return false;
@@ -219,12 +219,12 @@ bool DLList<T>::Empty() {
 template<typename T>
 bool DLList<T>::AddBefore(Node * desNode, T data) {
     // empty case
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         return false;
     }
 
     Node *currNode = this->head;
-    while (currNode != NULL) {
+    while (currNode != nullptr) {
         if (currNode == desNode) {
             // add logic, bem, reverse erase logic
 
@@ -278,12 +278,12 @@ bool DLList<T>::AddBefore(Node * desNode, T data) {
 template<typename T>
 bool DLList<T>::AddAfter(Node * desNode, T data) {
     // empty case
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         return false;
     }
 
     Node *currNode = this->head;
-    while (currNode != NULL) {
+    while (currNode != nullptr) {
         if (currNode == desNode) {
             // add logic, bem, reverse erase logic
 
@@ -304,7 +304,7 @@ bool DLList<T>::AddAfter(Node * desNode, T data) {
                 newNode->data = data;
                 newNode->prev = currNode;
                 newNode->next = currNode->next;
-                if (currNode->next != NULL) {
+                if (currNode->next != nullptr) {
                     currNode->next->prev = newNode;
                 }
                 currNode->next = newNode;
@@ -323,7 +323,7 @@ bool DLList<T>::AddAfter(Node * desNode, T data) {
                 newNode->data = data;
                 tail->next = newNode;
                 newNode->prev = tail;
-                newNode->next = NULL;
+                newNode->next = nullptr;
                 tail = newNode;
                 numNodes++;
                 return true;
